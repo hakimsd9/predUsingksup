@@ -1,6 +1,16 @@
 """
 Generates the dictionary {parameter_id: name_associated} and
 stocks the result in a file 'output'
+
+Parameters
+textFile - text file: the Codebook
+csvFile - csv: w1nesarc.csv
+output - text file: the file in which the dictionary will be dumped
+target - str: the word we are tracking
+delim - str: delimiter
+
+Result
+None
 """
 
 import csv
