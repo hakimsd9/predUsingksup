@@ -3,14 +3,16 @@ Generates the dictionary {parameter_id: name_associated} and
 stocks the result in a file 'output'
 
 Parameters
-textFile - text file: the Codebook
-csvFile - csv: w1nesarc.csv
-output - text file: the file in which the dictionary will be dumped
-target - str: the word we are tracking
-delim - str: delimiter
+    textFile - text file: the Codebook
+    csvFile - csv: filteredW1nesarc.csv
+    output - binary: the file in which the dictionary will be dumped
+    delim - str: delimiter
 
 Result
-None
+    None
+
+Usage
+	python3 getDictidName.py w1codebook.txt w1nesarc.csv
 """
 
 import csv
@@ -38,16 +40,15 @@ def searchName(lst, target):
     return lst[idx:]
 
 
-def getDictionary(textFile, csvFile, output, delim = ','):
+def getDictionary(textFile, csvFile, output = 'dictIDName' , delim = ','):
     """
     Generates the dictionary {parameter_id: name_associated} and
     stocks the result in a file 'output'
 
     Parameters
         textFile - text file: the Codebook
-        csvFile - csv: w1nesarc.csv
-        output - text file: the file in which the dictionary will be dumped
-        target - str: the word we are tracking
+        csvFile - csv: filteredW1nesarc.csv
+        output - binary: the file in which the dictionary will be dumped
         delim - str: delimiter
 
     Result
@@ -76,11 +77,8 @@ def getDictionary(textFile, csvFile, output, delim = ','):
 
 if __name__ == '__main__':
     from sys import argv
-    if 4 <= len(argv) <=5:
+    if 3 <= len(argv) <=4:
         getDictionary(*argv[1:])
+        print("Done")
     else:
-        print("Invalid number of arguments")
-    print("Done")
-
-
-                
+        print("Invalid number of arguments")               

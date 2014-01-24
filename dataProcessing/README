@@ -1,0 +1,64 @@
+Instructions to process the raw data (from nesarc) to the data we use for learning
+
+1- Execute selectVariables.py: Filter the original csv file (w1nesarv.csv) to keep the variables of interest only (The list of these variables is stocked in selectedVariables.csv)
+Usage: python3 selectVariables.py selectedVariables.csv w1nesarc.csv
+Output: The resulting csv is filteredVariablesW1nesarc.csv
+
+2- Filter the csv file in order to keep only the respondents who answered 3 to ALCABDEP12DX (ALCOHOL ABUSE/DEPENDENCE IN LAST 12 MONTHS)or to ALCABDEPP12DX (ALCOHOL ABUSE/DEPENDENCE PRIOR TO THE LAST 12 MONTHS)
+Usage: python3 filterRespondents.py filteredVariablesW1nesarc.csv 
+Output: filteredW1nesarc.csv
+
+3- Generate the dictionary {parameter_id: name_associated}
+Usage: python3 getDictidName.py w1codebook.txt filteredW1nesarc.csv
+Output: dictIDNumClasses - dictionary of the form  {ParameterID:ParameterName}
+
+4- Run dictionaryIDNumberOfClasses.py: Gives the number of different values taken by every Variable
+Usage: python3 dictionaryIDNumberOfClasses.py filteredW1nesarc.csv
+Output: dictIDNumClasses
+
+5- Create the dictionary {ID: Number corresponding to 'Unknown'}
+Some variables can take a value corresponding to the answer 'Unknown'. This value varies according to the variable (9,99,999 etc.)
+Usage: python3 generateDicUnknowns.py w1codebook.txt
+Output: dictUnknownNumbers - dict: dictionary {id: number_for_unknown}
+
+6- Get the number of different values taken by every variable excluding Blanks and Unknowns
+Usage: python3 IDNumberClassesNOBLU.py filteredW1nesarc.csv 
+Output: numberNoBLU - dict: {ID: Number of classes (excluding Blanks and Unknowns)}
+
+7- Get the number of Blanks and Unknowns for each variable
+Usage: python3 numberBLU.py
+Output: numberBLU - dict: {ID: Number of Blanks+Unknowns}
+
+8- List the continuous variables:
+Usage: python3 continuousVariables.py
+Output: listContinuousVariables - Dictionary containing the list of the continuous variables (['psu', 'stratum', 'weight', 'age'])
+
+9- Whiten the data
+Replace the elements of the column by (element-mean)/std
+The blanks remain blanks
+Usage: python3 dataWhitening.py 
+Output: data.csv
+
+10- Get content of the variables 
+Usage: python3 retrieveElementsCompleteVariables.py
+Output: contentOfTheVariables - dict: {ID: elements contained in each variable after whitening}
+
+11- encoding
+We encode the data as follows:
+Number of columns = number of classes (blanks and unknowns included) - 1 if the variable is binary
+If an answer is 'Yes-No', then we encode it as +-1
+
+eg. var has the possible answers 'Blank, Yes, No' -> 2 columns that can take the values [1 0] (BL); [0 1] (Yes); [0 -1] (No)
+    var has the possible answers 'a, b, c' -> 3 columns that can take the values [1 0 0] (a); [0 1 0] (b); [0 0 1] (c)
+
+Usage: python3 encoding.py
+Output: dataProcessed.csv - The processed csv file we will use for the learning
+
+12- Generate the dictionary {Column number: corresponding variable}
+This dictionary gives the link between column number and variable after the encoding
+Usage: python3 getDicColVar.py
+Output: dictionaryColumnVariable - dict {Column number: corresponding variable}
+
+13- Prepare the list of parameters names as a vector readable by matlab for later use
+Usage: python3 labelsForMatlab.py
+Output: np_labels.mat
