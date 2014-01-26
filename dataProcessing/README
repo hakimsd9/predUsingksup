@@ -52,7 +52,7 @@ eg. var has the possible answers 'Blank, Yes, No' -> 2 columns that can take the
     var has the possible answers 'a, b, c' -> 3 columns that can take the values [1 0 0] (a); [0 1 0] (b); [0 0 1] (c)
 
 Usage: python3 encoding.py
-Output: dataProcessed.csv - The processed csv file we will use for the learning
+Output: processedData.csv - The processed csv file we will use for the learning
 
 12- Generate the dictionary {Column number: corresponding variable}
 This dictionary gives the link between column number and variable after the encoding
