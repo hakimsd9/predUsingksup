@@ -26,7 +26,13 @@ def generateDictionary(csvFile, destination = 'numberNoBLU', delim = ','):
                                 classes.append(k)
                 idNumClasses[column[0]] = len(classes)
             else:
-                idNumClasses[column[0]] = 0
+                classes = []
+                for k in column[1:]:
+                    if k not in classes:
+                        if k != '':
+                            classes.append(k)
+                idNumClasses[column[0]] = len(classes)
+
         pickle.dump(idNumClasses, dst)
 
 
