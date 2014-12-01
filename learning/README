@@ -5,4 +5,6 @@ computeAucs: Compute aucs for ksupport/l1/l2 regularized logistic regression. Th
 
 correlationMatrices: Plot the correlation matrix of the main variables (list in "highestWeightedVars") taking one column for each variable (topVarsOneCol.csv)
 
+mainVars: Get the most important variables to predict 'S2CQ4A'
+
 scalabilityPlots: Code to obtain the scalability plots comparing, for l1, l2 and ksupport regularization (with different values of k) the convergence time
