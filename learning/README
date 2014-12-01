@@ -1,0 +1,8 @@
+
+compareBaselines: Compare performance of ksupport regularized logistic regression to ridge regression and a simple learner that takes a single best variable for prediction
+
+computeAucs: Compute aucs for ksupport/l1/l2 regularized logistic regression. The results are saved in a matrix auc that can be used to perform wilcoxon signed rank or other statistical tests
+
+correlationMatrices: Plot the correlation matrix of the main variables (list in "highestWeightedVars") taking one column for each variable (topVarsOneCol.csv)
+
+scalabilityPlots: Code to obtain the scalability plots comparing, for l1, l2 and ksupport regularization (with different values of k) the convergence time
